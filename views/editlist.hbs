@@ -1,0 +1,81 @@
+<section>
+{{# if success}}
+<p class="msg1">{{input_status}}</p>
+{{/if}}
+{{# if errors}}
+<p class="msg2">{{input_status}}</p>
+<ul class="msg2">
+{{# each errors}}
+<li>{{this.msg}}</li>
+{{/each}}
+</ul>
+{{/if}}
+</section>
+<section>
+    <p><h3>Add a new sensor:</h3>Entre location GPS coordinates (in degrees.minutes)</p>
+    <form action="/add" method="post" class="form1">
+		<input name="lat" placeholder="Latitude" pattern="^([5][0-9])|^([5][0-9])\.[0-9]{1,4}$" title="UK lat range (50 to 59), max. 4 digits after the dot, eg: 59.0000" required />
+        <input name="lng" placeholder="Longitude" pattern="^-[1-8]\.?\d{0,4}?$|^[0-2]\.?\d{0,4}?$" title="UK lng range (-8 to 2), max. 4 digits after the dot, eg: -8.0000" required />
+		<input name="simNu" placeholder="SIM number +44" pattern="^\+[4][4][7]\d{9}$" required />
+		<input type="text" name="loc" placeholder="location" required />
+		<br>
+		<input type="submit" name="submit" value="submit" />
+    </form>
+</section>
+<section>
+<h3>Edit sensor list</h3>
+ <form class="form2" name="editform" method="post" action="/editcms" >
+        <input name="editid" placeholder="ID" required value={{editid}}>
+		<input name="editlat" placeholder="Latitude" pattern="^([5][0-9])|^([5][0-9])\.[0-9]{1,4}$" title="UK lat range (50 to 59), max. 4 digits after the dot, eg: 59.0000" value={{editlat}}>
+        <input name="editlng" placeholder="Longitude" pattern="^-[1-8]\.?\d{0,4}?$|^[0-2]\.?\d{0,4}?$" title="UK lng range (-8 to 2), max. 4 digits after the dot, eg: -8.0000" value={{editlng}}>
+		<input name="editsimNu" placeholder="SIM number +44" pattern="^\+[4][4][7]\d{9}$" value={{editsimNu}}>
+		<input type="text" name="editloc" placeholder="location" value="{{editloc}}">
+		<br>
+		<input type="submit" name="find" value="Find by ID" />
+		<input type="submit" name="update" value="Update" />
+		<input type="submit" name="dele" value="Delete" />
+		</form>
+</section>
+
+<section>
+    <h3>Notification recipients' details</h3>
+
+    <form action="/noteconts" method="post" class="form3">
+	<input type="text" name="id" placeholder="ID" value={{id}}>
+	<input type="text" name="fname" placeholder="First name" value={{fname}}>
+	<input type="text" name="lname" placeholder="Last name" value={{lname}}>
+	<input type="tel" name="contsimNu" placeholder="Phone No. (+44)" value={{simNu}}>
+	<input type="text" name="note" placeholder="Notes" value={{note}}>
+	<br>
+	<input type="submit" name="contadd" value="Add" />
+	<input type="submit" name="contfind" value="Find by ID" />
+	<input type="submit" name="contupdate" value="Update" />
+	<input type="submit" name="contdele" value="Delete" />
+	<input type="submit" name="loaddata" value="Load" />
+    </form>
+</section>
+
+<section>
+{{#if lst}}
+<h3>recipients' details list</h3>
+<p></p>
+ <table name="contlist" class="table">
+ <tr>
+	<th width=20px>ID</th>
+	<th>First name</th>
+	<th>Surname</th>
+	<th width=100px>Contact number</th>
+	<th>Notes</th>
+	</tr>
+	{{# each lst}}
+    <tr>
+	<td width=20px>{{this._id}}</td>
+	<td>{{this.fname}}</td>
+	<td>{{this.lname}}</td>
+	<td width=100px>{{this.simNu}}</td>
+	<td>{{this.note}}</td>
+	</tr>
+    {{/each}}
+	{{/if}}
+</table>
+</section>

@@ -1,0 +1,153 @@
+<section>
+<p class="ST">Select a sensor<p>
+<form action='/monitorsensors' method='get'>
+    <select data-style='btn-info' name='S'>
+        <option name='' value=''>Select a sensor</option>
+        {{#if items}}
+		{{# each items}}	
+		<option value='{{this._id}}'>S{{this._id}}</option>
+		{{/each}}	
+		{{/if}}  
+    </select>
+    <input type='submit' value='submit'/>
+</form>
+</section>
+
+<section>
+{{# if success}}
+<p class="msg1">{{input_status}}</p>
+{{/if}}
+{{# if errors}}
+<p class="msg2">{{input_status}}</p>
+<ul class="msg2">
+{{# each errors}}
+<li>{{this.msg}}</li>
+{{/each}}
+</ul>
+{{/if}}
+</section>
+
+<div class="chart1"></div>
+<script src='jquery/dist/jquery.min.js'></script>
+<script src='d3/d3.js'></script>
+<script>
+function init() {
+d3.selectAll('svg').remove();
+var char1_width = $(".chart1").width();
+var char1_height = $(".chart1").height();
+//console.log(char1_width, char1_height);
+//read collection name
+// Parse the date / time
+var	parseDate = d3.time.format("%b-%y");
+function format(str){
+var a = str.toString();
+var b = a.slice(0,2)+'-'.concat(a.slice(2,4))+'-'.concat(a.slice(4,8));
+return b;
+}
+var data =[];
+{{# each obj }}
+var x = {{splitDate2 this.createdAt}};
+console.log(x);
+	data.push({
+	 date: + x,
+	 charge: + {{this.charge}},
+	 });
+    {{/each}}
+console.log(data);
+
+// chart1
+var margin = {top: 40, right: 10, bottom: 100, left: 70},
+		width = char1_width - margin.left - margin.right,
+		height = char1_height - margin.top - margin.bottom;
+//console.log(margin);
+// Specify scales for the x and y axes		
+var xScale = d3.scale.ordinal()
+		.domain(data.map(function(d){return format(d.date);}))
+		.rangeRoundBands([0, width], 0.2, 0.2);
+var yScale = d3.scale.linear()
+		.domain([0, d3.max(data, function(d){ return d.charge; })]).nice()   // .nice() make axis end in round number    
+		.range([height, 0]);
+//axes 
+var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left")
+		.ticks(10, ".%");
+		// draw bars
+var svg = d3.select(".chart1")
+        .append("svg")
+        .attr({
+		"width" : char1_width,
+		"height" : char1_height
+		})
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");	
+	svg.selectAll("rect")
+		.data(data)
+		.enter()
+		.append("rect")
+		.attr("height", 0)
+		.attr("y", height)
+		.attr({
+		"width": xScale.rangeBand(),
+		"height": function(d){ return height - yScale(d.charge);},
+		"x":function(d){return xScale(format(d.date));},
+		"y":function(d){return yScale(d.charge);},
+		"fill": "yellow"
+	});
+// label the bars
+	svg.selectAll("text")
+		.data(data)
+		.enter()
+		.append("text")
+		.text(function(d) {return d.charge;})
+		.attr("x", function(d){return xScale(format(d.date)) + xScale.rangeBand()/2;})
+		.attr("y", function(d)
+		{
+		var a = 20;
+		if ((height - yScale(d.charge)) < 20) a = -20;
+		return yScale(d.charge)+ a;})
+		.style("fill", "red")
+		.style("font-weight", "bold")
+		.style("text-anchor", "middle");
+//draw axes
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(0,"+height+")")
+		.call(xAxis)
+		.selectAll("text")
+		.attr("dx", "-0.2em")
+		.attr("dy", "1.0em")
+		.style("text-anchor","end")
+		.style("font-size", "20px")
+		.attr("transform", "rotate(-45)")
+		.style("text-anchor", "end");
+	svg.append("g")
+		.attr("class", "axis")
+		.call(yAxis)
+		.append("text")
+		.attr({
+		"dx": "15em",
+		"dy": "-1em"
+		})
+		.style("text-anchor","end")
+		.style("font-size", "20px")
+		.text("Battery charging status");
+// y axis title
+	svg.append("g")
+        .attr("class", "axis")
+        .append("text")
+        .text("Relative charging (%)")
+        .attr("transform", "translate(-50, 200), rotate(-90)");
+		}
+		</script>
+{{# if obj}}
+<script>
+// Draw for the first time to initialize.
+init();
+ // Redraw based on the new size whenever the browser window is resized.
+window.addEventListener("resize", init);
+</script>
+{{/if}}

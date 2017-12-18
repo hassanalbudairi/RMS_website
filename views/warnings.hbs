@@ -1,0 +1,94 @@
+<section>
+<p><br>Warnings<br></p>
+{{#if objs}}
+<table name="warnings list" class="table">
+ <tr>
+	<th width=20px>No.</th>
+	<th width=45px>Sensor ID</th>
+	<th>Sensor location</th>
+	<th>Warning date</th>
+	<th>Warning message</th>
+	<th>Action</th>
+	</tr>
+	{{# each objs}}
+    <tr>
+	<td width=20px>{{this._id}}</td>
+	<td width=45px>{{this.snr_id}}</td>
+	<td>{{this.snr_loc}}</td>
+	<td>{{splitDate this.createdAt}}</td>
+	<td>{{this.msg}}</td>
+	<td>{{this.action}}</td>
+	</tr>
+    {{/each}}
+</table>
+{{else}}
+<p class="msg1"> No recorded warnings</p>
+{{/if}}
+</section>
+<br>
+<section>
+{{# if success}}
+<p class="msg1">{{stus}}</p>
+{{/if}}
+
+{{# if errors}}
+<p class="msg2">{{stus}}</p>
+<ul class="msg2">
+{{# each errors}}
+<li>{{this.msg}}</li>
+{{/each}}
+</ul>
+{{/if}}
+</section>
+<section>
+<p>Photograph section</p>
+<form action="/mmsmsg" method="post" class="form3" >
+	<input type="text" name="id" placeholder="ID" value={{_id}}>
+	<input type="text" name="Snrid" placeholder="Sensor id" value={{Snrid}}>
+	<input type="text" name="loc" placeholder="Location" value={{loc}}>
+	<input type="text" name="campos" placeholder="Camera position" value={{campos}}>
+	<input type="tel" name="camsimNu" placeholder="Phone No. (+44)" value={{simNu}}>
+	<br>
+	<input type="submit" name="camadd" value="Add" />
+	<input type="submit" name="camfind" value="Find by ID" />
+	<input type="submit" name="camupdate" value="Update" />
+	<input type="submit" name="camtdele" value="Delete" />
+	<input type="submit" name="lddata" value="Load cameras list" />
+	<input type="submit" name="reqmms" value="Request MMS" />
+	<input type="submit" name="loadmms" value="Load photos" />
+    </form>
+</section>
+
+<section>	
+ {{#if lst}}
+ <p> Table <p>
+ <table class="table" width="98%">
+ <p> GSM Cameras list</p>
+ <tr>
+	<th width=20px>ID</th>
+	<th width=45px>Sensor ID</th>
+	<th>Location</th>
+	<th width=50px>Camera position</th>
+	<th width=100px>SIM number</th>
+	</tr>
+	{{# each lst}}
+    <tr>
+	<td width=20px>{{this._id}}</td>
+	<td width=45px>{{this.Snrid}}</td>
+	<td>{{this.loc}}</td>
+	<td width=50px>{{this.campos}}</td>
+	<td width=100px>{{this.simNu}}</td>
+	</tr>
+    {{/each}}
+</table>
+	{{/if}}
+</section>
+<section class="warpper">
+{{#if photos}}
+{{# each photos}}
+<section class="imgs">
+<a href = 'data:image/png;base64,{{this.img}}' data-lightbox="mygallery" data-title="{{this.date}}"><img src='data:image/png;base64,{{this.img}}' /></img></a>
+</section>
+{{/each}}
+{{/if}}
+</section>

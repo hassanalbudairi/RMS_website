@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{{title}}}</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/lightbox.min.css">
+	<script type="text/javascript" src="js/lightbox-plus-jquery.min.js"></script>	
+</head>
+<div class="header">
+<img class="img-responsive" src="images/qts_logo.png" alt="QTS Group">
+	<section class="pages">
+	<li><a href="/">Home</a></li>
+	<li><a href="rmsoverview">RMS Monitoring</a></li>
+	<li><a href="about">About</a></li>
+	<li><a href="contact">Contact</a></li>
+	</section>	
+<div class="nav">
+	<li><a href="rmsoverview">RMS overview</a></li>
+	<li><a href="editlist">Edit list</a></li>
+	<li><a href="monitorsensors">Monitor individual sensor</a></li>
+	<li><a href="warnings">Warnings</a></li>
+</div>
+</div>
+
+<body>
+<div class="body" id="body">
+<section class="side" id="side">
+{{{body}}}
+</section>
+<section class="map" id="map"></section>
+</div>
+<script>
+function initMap() {
+	var mapOptions = {
+	zoom: 8,
+	center: {lat:56.4907,lng:-4.2026},
+	//Add dropdwon menu to change the map style
+	mapTypeControl: true,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+      position: google.maps.ControlPosition.TOP_CENTER
+    }
+	};
+var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    // Add some markers to the map.
+    // Note: The code uses the JavaScript Array.prototype.map() method to
+    // create an array of markers based on a given "locations" array.
+    // The map() method here has nothing to do with the Google Maps API.
+var locations =[];
+{{# each items }}
+	locations.push({
+	 lat: + {{this.lat}},
+	 lng: + {{this.lng}},
+	 });
+    {{/each}}
+//console.log(locations); 
+	var marker = locations.map(function(location, i) {
+	var j = i+1;
+	        return new google.maps.Marker({
+            position: location,
+			map: map,
+            label: "S"+j
+		  });
+  });
+// add zoom on click
+	google.maps.event.addListener(marker[0],'click',function(){
+	var pos = map.getZoom();
+	map.setZoom(16);
+	map.setCenter(marker[0].getPosition());
+	window.setTimeout(function() {map.setZoom(pos);},6000);	
+	});
+	
+	google.maps.event.addListener(marker[1],'click',function(){
+	var pos = map.getZoom();
+	map.setZoom(16);
+	map.setCenter(marker[1].getPosition());
+	window.setTimeout(function() {map.setZoom(pos);},6000);	
+	});
+	
+	google.maps.event.addListener(marker[2],'click',function(){
+	var pos = map.getZoom();
+	map.setZoom(16);
+	map.setCenter(marker[2].getPosition());
+	window.setTimeout(function() {map.setZoom(pos);},6000);	
+	});
+	
+	google.maps.event.addListener(marker[3],'click',function(){
+	var pos = map.getZoom();
+	map.setZoom(16);
+	map.setCenter(marker[3].getPosition());
+	window.setTimeout(function() {map.setZoom(pos);},6000);	
+	});
+	google.maps.event.addListener(marker[4],'click',function(){
+	var pos = map.getZoom();
+	map.setZoom(16);
+	map.setCenter(marker[4].getPosition());
+	window.setTimeout(function() {map.setZoom(pos);},6000);	
+	});	
+	}
+</script>
+<script async defer
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBevPHuAJdCiJAbSoXVlbqPnc4Sz8l64OU&callback=initMap"></script>
+</body>
+</html>

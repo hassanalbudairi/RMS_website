@@ -1,0 +1,17 @@
+	<h3>Sensors list</h3> 
+	<table class="table" width="98%" >
+	<tr>
+	<th width=20px>ID</th>
+	<th width=100px>Sim Number</th>
+	<th>Location</th>
+	<th>Activation date</th>
+	</tr>
+        {{# each items }}
+            <tr>
+			<td width=20px>{{this._id}}</td>
+			<td width=100px>{{this.simNu}}</td>
+			<td>{{this.loc}}</td>
+			<td>{{splitDate this.createdAt}}</td>
+			</tr>
+        {{/each}}
+    </table>	

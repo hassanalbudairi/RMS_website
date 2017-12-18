@@ -1,0 +1,336 @@
+
+/* layouts*/
+body{
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.body{
+	width:1500px;
+	margin: 0px auto;
+	top: 60px;
+	min-height:700px;
+}
+.side{
+	position:relative;
+	width:700px;
+	top: 90px;
+	min-height:700px;
+	float:left;
+}
+.map {
+	position:relative;
+	width: 700px;
+	top:90px;
+	min-height:700px;
+	float:right;
+}
+.header{
+	position: relative;
+	width:1500px;
+	margin:0px auto;
+	background-color: #ff5a00;
+	height: 100px;
+}
+.header .img-responsive
+{
+	float: left;
+	padding-top:20px;
+	padding-left: 15px;
+}
+.header .pages {
+	display: block;
+	float:right;
+	text-transform: uppercase;
+    overflow: hidden;
+	list-style-type: none;
+	color: white;
+	font-weight: bold;
+	padding-top:60px;
+}
+.header .pages li {
+    float: left;	
+}
+.header .pages li a {
+    display: block;
+	color: white;
+    text-align: center;
+	padding-right: 12px;
+	padding-left: 12px;
+    text-decoration: none;	
+}
+.header .pages li a:hover {
+    background-color: white;
+	color:#ff5a00;
+}
+
+.nav {
+	position:absolute;
+	width:740px;
+	display: block;
+	float:left;
+	list-style-type: none;
+	color: white;
+	font-weight: bold;
+	top:100px;
+}
+.nav li {
+	float:left;
+	list-style-type:none;
+}
+.nav li a{
+	background-color: #ff5a00;
+	color: white;
+    height: 30px;
+    text-align: center;
+    display: block;
+    border-radius:22px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 8px 8px 2px 8px;
+	margin:2px 2px 2px 2px;	
+}
+
+
+/* Home page (index view)*/
+.pri{
+	font-family:Verdana;
+	color: #ff5a00;
+	font-size: 1500%;
+	/*font-size:300px;*/
+	font-weight: bold;
+	text-decoration:underline;
+	text-align:center;
+	text-transform:uppercase;
+	letter-spacing:16px;
+	margin:0.1px
+	}
+	
+	
+.sec{
+	font-family:Verdana;
+	font-weight: bold;
+	color: #ff5a00;
+	text-align:center;
+	text-transform:uppercase;
+	margin:10px 10px 10px 10px;
+	}
+
+.footer {
+	position: fixed;
+	bottom: 5px;
+	right: 20px;
+	width: 340px;
+}
+.footer p{
+	text-decoration: underline;
+}
+.footer a {
+	display: inline-block;
+	padding-right: 12px;
+}
+.footer img{
+	height:30px;
+	width:90px;
+	display: block;
+}
+.footer a:hover img {
+	transform: scale(1.1);
+}
+.footer_text{
+	font-weight: bold;
+	padding-right: 5%;
+	text-decoration: underline;
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+}
+
+/* About page (about view)*/
+.rms_para{
+	float:left;
+	top: 150px;
+	width: 56%;
+	text-align: left;
+	padding: 10px;
+}
+.rms_para h1{
+	font-size: 110%;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.rms_para p li{
+	font-size: 105%;
+	line-height:120%;
+}
+
+.figs{
+	width: 40%;
+	float:right;
+	}
+.figs img{
+	height: 100%;
+	width: 100%;
+	border: solid;
+	display: block;	
+}
+figcaption {
+  font-size: 80%;
+  display: block;
+  padding: 5px;
+  font-weight: bold;
+}
+/* RMS monitoring page*/
+/* RMS overview page*/
+
+.table{
+	width:95%;
+	table-layout:fixed;
+	font-size: 80%;
+	border: 0;
+    word-wrap:normal;
+    border-collapse:collapse;
+	text-align: center;
+}
+.table th{
+	background-color: #ff5a00;
+	color:white;
+	border: 1px solid black;
+}
+.table td{
+	border: 1px solid black;
+	padding: 1px;
+}
+
+/* Edit list page*/
+.msg1 , ul {
+	display: block;
+	color: green;
+}
+
+.msg2 , ul {
+	display: block;
+	color: red;
+}
+
+h3 {
+	display:block;
+	font-weight: bold;
+	text-decoration: underline;	
+}
+
+.form1 input{
+	display: inline-block;
+	margin: 3px 3px 3px 3px;
+}
+.form1 input[name='lat'], input[name='lng'] {
+	width: 70px;
+}
+.form1 input[name='simNu']{
+	width: 150px;
+}
+.form1 input[name='loc']{
+	width: 300px;
+}
+
+.form2 input {
+display: inline-block;
+margin: 3px 3px 3px 3px;
+width: 80px;	
+}
+.form2 input[name='editid'] {
+	width: 40px;
+}
+.form2 input[name='editlat'], input[name='editlng'] {
+	width: 70px;
+}
+.form2 input[name='editsimNu'] {
+	width: 150px;
+}
+.form2 input[name='editloc'] {
+	width: 250px;
+}
+
+.form3 input {
+display: inline-block;
+margin: 3px 3px 3px 3px;	
+}
+.form3 input[type='text'] {
+	width: 100px;
+}
+.form3 input[name='note'] {
+	width: 200px;
+}
+.form3 input[name='id'] {
+	width: 20px;
+}
+
+/* Monitor indivdual sensor*/
+.chart1{
+	position: absolute;
+	top: 120px;
+	width:95%;
+	height:500px;
+}
+
+
+/* image gallary */
+.warper {
+	width:100%;
+	height:100%;
+	padding: 5px;
+}
+
+.imgs {
+	margin:5px 5px;
+	float: left;
+	position: relative;
+	border: 1px solid green;
+}
+.imgs img{
+	width:30px;
+	height:30px;
+	padding: 5px;
+	filter: grayscale(100%);
+	transition: 1s;
+}
+.imgs img:hover{
+	filter: grayscale(0);
+	transform: scale(1.1);
+}
+
+
+/* Screen size responsive*/
+@media screen and (max-width:1499px){
+.body{width:100%}
+.side{width:49%}
+.map{width: 49%}
+.header{width:100%}
+.nav{width:50%}
+.chart1{width:94%}
+}
+
+@media screen and (max-width:640px){
+.header .pages li a {
+	padding-right: 3px;
+	padding-left: 3px;
+	font-size:12px;
+	}
+.side{width:100%}
+.nav{width:100%}
+.map{width: 100%}
+.header .img-responsive{max-width: 20%}
+.pri{font-size:150px}
+.rms_para{width:95%}/* About page (about view)*/
+.figs{width: 100%}
+.chart1{width:95%}
+}
+
+@media screen and (max-width:375px){
+.body{width:350px}
+.side{width:350px}
+.nav{width:350px}
+.map {width: 350px}
+.header{width:350px}
+.header .pages li a {font-size:10px}
+.pri{font-size:75px}
+.chart1{width:350px}
+}
